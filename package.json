@@ -1,9 +1,9 @@
 {
-  "name": "toDoList",
+  "name": "Group-capstone",
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "homepage": "https://yulianav09.github.io/To-Do-list/",
+  "homepage": "https://yulianav09.github.io/Group-capstone/",
   "scripts": {
     "test": "jest",
     "start": "webpack serve --open",
