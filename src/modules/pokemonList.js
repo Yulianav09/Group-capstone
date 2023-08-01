@@ -1,20 +1,19 @@
-import { showPopup } from './displayComment.js';
-import { getPokemon} from './API.js';
+import showPopup from './displayComment.js';
+import getPokemon from './API.js';
 
 export default class PokemonList {
   constructor(container) {
     this.container = container;
     this.list = [];
-    this.#fetchList();
   }
 
-  #fetchList = async () => {
+  fetchList = async () => {
     const response = await getPokemon();
     this.list = await response.results;
     this.list.forEach(async (element) => {
-      const pokemonDetails = await getPokemon(element.name)
-      const picture = pokemonDetails.sprites.other.dream_world.front_default
-      element.sprite = picture
+      const pokemonDetails = await getPokemon(element.name);
+      const picture = pokemonDetails.sprites.other.dream_world.front_default;
+      element.sprite = picture;
       this.#addPokemon(element);
     });
   }
@@ -29,8 +28,8 @@ export default class PokemonList {
     <p>0 likes</p>
     <button class="commentButton">Comments</button>
     `;
-    const commentButton = pokemonItem.querySelector('.commentButton')
-    commentButton.addEventListener('click', () => {showPopup(pokemon.name)})
+    const commentButton = pokemonItem.querySelector('.commentButton');
+    commentButton.addEventListener('click', () => { showPopup(pokemon.name); });
     this.container.appendChild(pokemonItem);
   }
 }

@@ -4,3 +4,5 @@ import './displayComment.css';
 
 const container = document.querySelector('#container');
 const myPokemon = new PokemonList(container);
+
+myPokemon.fetchList();
