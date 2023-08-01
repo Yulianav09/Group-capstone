@@ -21,3 +21,17 @@
   max-width: 1200px;
   margin-right: auto;
 }
+
+#container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: end;
+}
+
+.pokemonImg {
+  width: 250px;
+}
+
+.pokemonImg img {
+  width: 100%;
+}

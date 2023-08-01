@@ -1,3 +1,4 @@
+import { showPopup } from './displayComment.js';
 import { getPokemon} from './API.js';
 
 export default class PokemonList {
@@ -23,11 +24,13 @@ export default class PokemonList {
     pokemonItem.classList.add('pokemonItem');
 
     pokemonItem.innerHTML = `
-    <div><img src="${pokemon.sprite}" alt="pokemon ${pokemon.name}"></div>
+    <div class= "pokemonImg"><img src="${pokemon.sprite}" alt="pokemon ${pokemon.name}"></div>
     <h2>${pokemon.name}</h2><button>♡</button>
     <p>0 likes</p>
-    <button>Comments</button>
+    <button class="commentButton">Comments</button>
     `;
+    const commentButton = pokemonItem.querySelector('.commentButton')
+    commentButton.addEventListener('click', () => {showPopup(pokemon.name)})
     this.container.appendChild(pokemonItem);
   }
 }

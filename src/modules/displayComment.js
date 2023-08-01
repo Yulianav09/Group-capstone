@@ -10,17 +10,23 @@ async function getPokemonDetails(pokemonName) {
 }
 
 // Function to display the popup with selected item's details
-function showPopup(pokemonName) {
+export function showPopup(pokemonName) {
   const popup = document.getElementById('popup');
   getPokemonDetails(pokemonName)
       .then((data) => {
           const html = `
-              <h2>${data.name.toUpperCase()}</h2>
-              <p>Height: ${data.height}</p>
-              <p>Weight: ${data.weight}</p>
-              <!-- Add more details here based on the PokeAPI response -->
+            <button id="closeButton">&#x2715</button>
+            <div><img src="${data.sprites.other.dream_world.front_default}" alt="pokemon ${data.name}"></div>
+            <h2>${data.name.toUpperCase()}</h2>
+            <p>Height: ${data.height}</p>
+            <p>Weight: ${data.weight}</p>
+            <!-- Add more details here based on the PokeAPI response -->
           `;
           popup.innerHTML = html;
+          const closeButton = popup.querySelector('#closeButton')
+          closeButton.addEventListener('click',() => {
+            closePopup();
+          })
           popup.style.display = 'block';
       })
       .catch((error) => {
@@ -35,23 +41,10 @@ function closePopup() {
   popup.style.display = 'none';
 }
 
-// Create a list of Pokemon items
-const pokemonList = ['bulbasaur', 'charmander', 'squirtle']; // Add more Pokemon names here
-
-// Dynamically generate the Pokemon list cards
-const pokemonListContainer = document.querySelector('.pokemon-list');
-pokemonList.forEach((pokemonName) => {
-  const pokemonCard = document.createElement('div');
-  pokemonCard.classList.add('pokemon-card');
-  pokemonCard.textContent = pokemonName.toUpperCase();
-  pokemonCard.addEventListener('click', () => showPopup(pokemonName));
-  pokemonListContainer.appendChild(pokemonCard);
-});
-
 // Close popup when clicking outside of it
-window.addEventListener('click', (event) => {
+document.querySelector('body').addEventListener('click', (event) => {
   const popup = document.getElementById('popup');
-  if (event.target === popup) {
+  if (event.target == popup) {
       closePopup();
   }
 });
