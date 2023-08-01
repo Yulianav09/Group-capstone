@@ -1,4 +1,4 @@
-import { getScores, sendScore } from './API.js';
+import { getPokemon} from './API.js';
 
 export default class PokemonList {
   constructor(container) {
@@ -8,9 +8,14 @@ export default class PokemonList {
   }
 
   #fetchList = async () => {
-    const response = await getScores();
-    this.list = await response.result;
-    this.list.forEach((element) => { this.#addPokemon(element); });
+    const response = await getPokemon();
+    this.list = await response.results;
+    this.list.forEach(async (element) => {
+      const pokemonDetails = await getPokemon(element.name)
+      const picture = pokemonDetails.sprites.other.dream_world.front_default
+      element.sprite = picture
+      this.#addPokemon(element);
+    });
   }
 
   #addPokemon = (pokemon) => {
@@ -18,8 +23,8 @@ export default class PokemonList {
     pokemonItem.classList.add('pokemonItem');
 
     pokemonItem.innerHTML = `
-    <div><img src="https://img.pokemondb.net/artwork/large/bulbasaur.jpg" alt="pokemon"></div>
-    <h2>Bulbasaur</h2><button>♡</button>
+    <div><img src="${pokemon.sprite}" alt="pokemon ${pokemon.name}"></div>
+    <h2>${pokemon.name}</h2><button>♡</button>
     <p>0 likes</p>
     <button>Comments</button>
     `;
