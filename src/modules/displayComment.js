@@ -35,7 +35,7 @@ export default function showPopup(pokemonName) {
       closeButton.addEventListener('click', () => {
         closePopup();
       });
-      popup.style.display = 'block';
+      popup.style.display = 'grid';
     })
     .catch((error) => {
       console.error('Error:', error);
