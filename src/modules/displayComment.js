@@ -1,4 +1,5 @@
 import { addComment, getCommentsForPokemon } from './API.js';
+const htmlBody = document.querySelector('body')
 
 // Function to fetch Pokemon data from the PokeAPI
 async function getPokemonDetails(pokemonName) {
@@ -17,10 +18,12 @@ async function getPokemonDetails(pokemonName) {
 function closePopup() {
   const popup = document.getElementById('popup');
   popup.style.display = 'none';
+  htmlBody.style.overflowY = 'auto'
 }
 
 // Function to display the popup with selected item's details
 export default function showPopup(pokemonName) {
+  htmlBody.style.overflowY = 'hidden'
   const popup = document.getElementById('popup');
   getPokemonDetails(pokemonName)
     .then((data) => {
@@ -31,7 +34,6 @@ export default function showPopup(pokemonName) {
             <p>Height: ${data.height}</p>
             <p>Weight: ${data.weight}</p>
             <div id="commentsContainer"></div>
-            <!-- Add more details here based on the PokeAPI response -->
           `;
       popup.innerHTML = html;
       const closeButton = popup.querySelector('#closeButton');
