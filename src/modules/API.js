@@ -7,40 +7,36 @@ export const getPokemon = async (name = '?limit=12') => {
 };
 
 export const sendLike = (name) => {
-  fetch(involvement+'likes/',{
+  fetch(`${involvement}likes/`, {
     method: 'POST',
-    body: JSON.stringify({"item_id": name}),
+    body: JSON.stringify({ item_id: name }),
     headers: { 'Content-type': 'application/json' },
-  }) 
-}
+  });
+};
 
 export const getLike = async () => {
-  const response = await fetch(involvement+'likes/')
+  const response = await fetch(`${involvement}likes/`);
   return response.json();
-}
+};
 
-export const addComment = async (pokemonName, user, comment) => {
-  return await fetch(involvement+'comments', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      "item_id": pokemonName,
-      "username": user,
-      "comment": comment,
-    }),
-  })
+export const addComment = async (pokemonName, user, comment) => fetch(`${involvement}comments`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    item_id: pokemonName,
+    username: user,
+    comment,
+  }),
+})
   .catch((error) => {
     console.error('Error adding comment:', error);
   });
-}
 
-export const getCommentsForPokemon = async (pokemonName) => {
-  return await fetch(involvement+`comments?item_id=${pokemonName}`)
-      .then((response) => response.json())
-      .then(data => data)
-      .catch((error) => {
-        console.warn('Error fetching comments:', error);
-      });
-}
+export const getCommentsForPokemon = async (pokemonName) => fetch(`${involvement}comments?item_id=${pokemonName}`)
+  .then((response) => response.json())
+  .then((data) => data)
+  .catch((error) => {
+    console.warn('Error fetching comments:', error);
+  });

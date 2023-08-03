@@ -1,5 +1,5 @@
 import showPopup from './displayComment.js';
-import { getLike, getPokemon,  sendLike } from './API.js';
+import { getLike, getPokemon, sendLike } from './API.js';
 
 export default class PokemonList {
   constructor(container) {
@@ -11,7 +11,7 @@ export default class PokemonList {
   fetchList = async () => {
     const response = await getPokemon();
     this.list = await response.results;
-    await this.#fetchLikes()
+    await this.#fetchLikes();
     this.list.forEach(async (element) => {
       const pokemonDetails = await getPokemon(element.name);
       const picture = pokemonDetails.sprites.other.dream_world.front_default;
@@ -23,14 +23,14 @@ export default class PokemonList {
   // get all the likes saved in the API
   #fetchLikes = async () => {
     const response = await getLike();
-    response.forEach(element => {
-      this.list.forEach(pokemon => {
-        if (pokemon.likes === undefined) pokemon.likes = 0
+    response.forEach((element) => {
+      this.list.forEach((pokemon) => {
+        if (pokemon.likes === undefined) pokemon.likes = 0;
         if (pokemon.name === element.item_id) {
-          pokemon.likes = element.likes
+          pokemon.likes = element.likes;
         }
-      })
-    })
+      });
+    });
   }
 
   #addPokemon = (pokemon) => {
@@ -50,9 +50,9 @@ export default class PokemonList {
     this.container.appendChild(pokemonItem);
 
     likeButton.addEventListener('click', () => {
-      sendLike(pokemon.name)
-      pokemon.likes += 1
-      likesCounter.innerHTML=`${pokemon.likes} likes`
-    })
+      sendLike(pokemon.name);
+      pokemon.likes += 1;
+      likesCounter.innerHTML = `${pokemon.likes} likes`;
+    });
   }
 }

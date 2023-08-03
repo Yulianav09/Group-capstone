@@ -1,4 +1,4 @@
-import { addComment, getCommentsForPokemon } from "./API";
+import { addComment, getCommentsForPokemon } from './API.js';
 
 // Function to fetch Pokemon data from the PokeAPI
 async function getPokemonDetails(pokemonName) {
@@ -38,63 +38,60 @@ export default function showPopup(pokemonName) {
       closeButton.addEventListener('click', () => {
         closePopup();
       });
+      const commentsContainer = popup.querySelector('#commentsContainer');
 
       const displayComments = async () => {
         getCommentsForPokemon(pokemonName)
-              .then((comments) => {
-                if (comments?.error != undefined) throw comments
-                commentsContainer.innerHTML=''
-                comments.forEach((comment) => {
-                    const commentElement = document.createElement('p');
-                    commentElement.innerHTML = `${comment.creation_date} ${comment.username}: ${comment.comment}`;
-                    commentsContainer.appendChild(commentElement);
-                });
-              }).catch(error=>{
-                console.warn('No comments found:', error);
-              })
-      }
-
-      const commentsContainer = popup.querySelector('#commentsContainer');
-      popup.appendChild(commentsContainer);
-      displayComments()
-
-          const commentForm = document.createElement('form');
-          const nameInput = document.createElement('input');
-          nameInput.required = true
-          nameInput.placeholder = 'Your name...';
-          const commentInput = document.createElement('textarea');
-          commentInput.required = true
-          commentInput.placeholder = 'Your insights...';
-          const submitButton = document.createElement('button');
-          submitButton.textContent = 'Comment';
-
-          commentForm.appendChild(nameInput);
-          commentForm.appendChild(commentInput);
-          commentForm.appendChild(submitButton);
-          popup.appendChild(commentForm);
-
-          commentForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const userName = nameInput.value.trim();
-            const newComment = commentInput.value.trim();
-            if (newComment !== '' && userName !== '') {
-              addComment(pokemonName,userName, newComment)
-              .then(()=>displayComments());
-            }
-            commentInput.value = '';
-            nameInput.value = '';
-            
+          .then((comments) => {
+            if (comments?.error !== undefined) throw comments;
+            commentsContainer.innerHTML = '';
+            comments.forEach((comment) => {
+              const commentElement = document.createElement('p');
+              commentElement.innerHTML = `${comment.creation_date} ${comment.username}: ${comment.comment}`;
+              commentsContainer.appendChild(commentElement);
+            });
+          }).catch((error) => {
+            console.warn('No comments found:', error);
           });
+      };
 
-          popup.style.display = 'grid';
-      
+      popup.appendChild(commentsContainer);
+      displayComments();
+
+      const commentForm = document.createElement('form');
+      const nameInput = document.createElement('input');
+      nameInput.required = true;
+      nameInput.placeholder = 'Your name...';
+      const commentInput = document.createElement('textarea');
+      commentInput.required = true;
+      commentInput.placeholder = 'Your insights...';
+      const submitButton = document.createElement('button');
+      submitButton.textContent = 'Comment';
+
+      commentForm.appendChild(nameInput);
+      commentForm.appendChild(commentInput);
+      commentForm.appendChild(submitButton);
+      popup.appendChild(commentForm);
+
+      commentForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const userName = nameInput.value.trim();
+        const newComment = commentInput.value.trim();
+        if (newComment !== '' && userName !== '') {
+          addComment(pokemonName, userName, newComment)
+            .then(() => displayComments());
+        }
+        commentInput.value = '';
+        nameInput.value = '';
+      });
+
+      popup.style.display = 'grid';
     })
     .catch((error) => {
       console.error('Error:', error);
       popup.style.display = 'none';
     });
 }
-
 
 // Close popup when clicking outside of it
 document.querySelector('body').addEventListener('click', (event) => {
