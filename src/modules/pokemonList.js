@@ -39,7 +39,7 @@ export default class PokemonList {
 
     pokemonItem.innerHTML = `
     <div class= "pokemonImg"><img src="${pokemon.sprite}" alt="pokemon ${pokemon.name}"></div>
-    <h2>${pokemon.name}</h2><button class="likeButton">♡</button>
+    <div class="namePokemon"><h2>${pokemon.name}</h2><button class="likeButton">♡</button></div>
     <p class="likesCounter">${pokemon.likes} likes</p>
     <button class="commentButton">Comments</button>
     `;

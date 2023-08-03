@@ -33,11 +33,12 @@ body {
   width: 80%;
   background-color: rgb(235, 235, 30);
   border: 5px solid #276ae7;
-  padding: 1rem;
+  padding: 2rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   height: 90vh;
-  gap: 0.5em;
+  gap: 1em;
+  grid-template-rows: 1fr repeat(3, 35px);
   align-items: center;
   justify-items: center;
   border-radius: 20px;
@@ -45,6 +46,17 @@ body {
 
 .pokemonImg {
   height: 100%;
+}
+
+#popup #closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: bold;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 #popup .pokemonImg {
