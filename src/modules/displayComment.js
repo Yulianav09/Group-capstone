@@ -1,4 +1,7 @@
 import { addComment, getCommentsForPokemon } from './API.js';
+import commentsCounter from './commentsCounter.js';
+
+const htmlBody = document.querySelector('body');
 
 // Function to fetch Pokemon data from the PokeAPI
 async function getPokemonDetails(pokemonName) {
@@ -16,25 +19,31 @@ async function getPokemonDetails(pokemonName) {
 
 function closePopup() {
   const popup = document.getElementById('popup');
-  popup.style.display = 'none';
+  popup.classList.remove('show');
+  htmlBody.style.overflowY = 'auto';
 }
 
 // Function to display the popup with selected item's details
 export default function showPopup(pokemonName) {
+  htmlBody.style.overflowY = 'hidden';
   const popup = document.getElementById('popup');
   getPokemonDetails(pokemonName)
     .then((data) => {
       const html = `
+            <div class = "popupWindow">
             <button id="closeButton">&#x2715</button>
             <div class= "pokemonImg"><img src="${data.sprites.other.dream_world.front_default}" alt="pokemon ${data.name}"></div>
             <h2>${data.name.toUpperCase()}</h2>
             <p>Height: ${data.height}</p>
             <p>Weight: ${data.weight}</p>
+            <h2 id='commentsCounter'>Comments (0)</h2>
             <div id="commentsContainer"></div>
-            <!-- Add more details here based on the PokeAPI response -->
+            <h2>Add Comment</h2>
+            </div>
           `;
       popup.innerHTML = html;
       const closeButton = popup.querySelector('#closeButton');
+      const popupWindow = document.querySelector('.popupWindow');
       closeButton.addEventListener('click', () => {
         closePopup();
       });
@@ -47,15 +56,15 @@ export default function showPopup(pokemonName) {
             commentsContainer.innerHTML = '';
             comments.forEach((comment) => {
               const commentElement = document.createElement('p');
+              commentElement.classList.add('comment');
               commentElement.innerHTML = `${comment.creation_date} ${comment.username}: ${comment.comment}`;
               commentsContainer.appendChild(commentElement);
             });
+            commentsCounter();
           }).catch((error) => {
             console.warn('No comments found:', error);
           });
       };
-
-      popup.appendChild(commentsContainer);
       displayComments();
 
       const commentForm = document.createElement('form');
@@ -71,7 +80,7 @@ export default function showPopup(pokemonName) {
       commentForm.appendChild(nameInput);
       commentForm.appendChild(commentInput);
       commentForm.appendChild(submitButton);
-      popup.appendChild(commentForm);
+      popupWindow.appendChild(commentForm);
 
       commentForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -85,11 +94,11 @@ export default function showPopup(pokemonName) {
         nameInput.value = '';
       });
 
-      popup.style.display = 'grid';
+      popup.classList.add('show');
     })
     .catch((error) => {
       console.error('Error:', error);
-      popup.style.display = 'none';
+      popup.classList.remove('show');
     });
 }
 

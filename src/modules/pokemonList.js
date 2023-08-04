@@ -1,5 +1,6 @@
 import showPopup from './displayComment.js';
 import { getLike, getPokemon, sendLike } from './API.js';
+import homepageCounter from './homepageCounter.js';
 
 export default class PokemonList {
   constructor(container) {
@@ -17,6 +18,7 @@ export default class PokemonList {
       const picture = pokemonDetails.sprites.other.dream_world.front_default;
       element.sprite = picture;
       this.#addPokemon(element);
+      homepageCounter();
     });
   }
 
