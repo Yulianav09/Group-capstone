@@ -1,6 +1,7 @@
 import showPopup from './displayComment.js';
 import { getLike, getPokemon, sendLike } from './API.js';
-import { homepageCounter } from './homepageCounter.js';
+import homepageCounter from './homepageCounter.js';
+
 export default class PokemonList {
   constructor(container) {
     this.container = container;
@@ -12,13 +13,13 @@ export default class PokemonList {
     const response = await getPokemon();
     this.list = await response.results;
     await this.#fetchLikes();
-    for (const element of this.list) {
+    this.list.forEach(async (element) => {
       const pokemonDetails = await getPokemon(element.name);
       const picture = pokemonDetails.sprites.other.dream_world.front_default;
       element.sprite = picture;
       this.#addPokemon(element);
-    }
-    homepageCounter()
+      homepageCounter();
+    });
   }
 
   // get all the likes saved in the API

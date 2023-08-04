@@ -1,6 +1,7 @@
 import { addComment, getCommentsForPokemon } from './API.js';
-import { commentsCounter } from './commentsCounter.js';
-const htmlBody = document.querySelector('body')
+import commentsCounter from './commentsCounter.js';
+
+const htmlBody = document.querySelector('body');
 
 // Function to fetch Pokemon data from the PokeAPI
 async function getPokemonDetails(pokemonName) {
@@ -19,12 +20,12 @@ async function getPokemonDetails(pokemonName) {
 function closePopup() {
   const popup = document.getElementById('popup');
   popup.style.display = 'none';
-  htmlBody.style.overflowY = 'auto'
+  htmlBody.style.overflowY = 'auto';
 }
 
 // Function to display the popup with selected item's details
 export default function showPopup(pokemonName) {
-  htmlBody.style.overflowY = 'hidden'
+  htmlBody.style.overflowY = 'hidden';
   const popup = document.getElementById('popup');
   getPokemonDetails(pokemonName)
     .then((data) => {
@@ -52,11 +53,11 @@ export default function showPopup(pokemonName) {
             commentsContainer.innerHTML = '';
             comments.forEach((comment) => {
               const commentElement = document.createElement('p');
-              commentElement.classList.add('comment')
+              commentElement.classList.add('comment');
               commentElement.innerHTML = `${comment.creation_date} ${comment.username}: ${comment.comment}`;
               commentsContainer.appendChild(commentElement);
             });
-            commentsCounter()
+            commentsCounter();
           }).catch((error) => {
             console.warn('No comments found:', error);
           });
