@@ -13,7 +13,7 @@ const getPokemonDetails = async (pokemonName) => {
     console.error('Error fetching data:', error);
   }
   return data;
-}
+};
 
 // Function to close the popup
 
@@ -21,7 +21,7 @@ const closePopup = () => {
   const popup = document.getElementById('popup');
   popup.classList.remove('show');
   htmlBody.style.overflowY = 'auto';
-}
+};
 
 // Function to display the popup with selected item's details
 export default (pokemonName) => {
@@ -100,7 +100,7 @@ export default (pokemonName) => {
       console.error('Error:', error);
       popup.classList.remove('show');
     });
-}
+};
 
 // Close popup when clicking outside of it
 document.querySelector('body').addEventListener('click', (event) => {
