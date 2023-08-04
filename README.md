@@ -51,10 +51,10 @@ For more information on the importance of a professional README for your reposit
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 To-Do list <a name="To-Do list"></a>
+# 📖 Group-capstone <a name="Group-capstone"></a>
 
 
-**To-Do list** is a project to add tasks to a list, you can check and remove the tasks you already completed
+**Group-capstone** Project is about building an web application based on an external API.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -63,14 +63,15 @@ For more information on the importance of a professional README for your reposit
 * HTML
 * CSS
 * JAVASCRIPT
+* REST API
 
 <!-- Features -->
 
 ### Key Features <a name="key-features"></a>
 
-- **Adding new task**
-- **Deleting tasks**
-- **Saved tasks when you refresh**
+- **Fech Pokemons from API**
+- **Save likes to the Involvement API**
+- **Save comments to the Involvement API**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -78,7 +79,7 @@ For more information on the importance of a professional README for your reposit
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://yulianav09.github.io/To-Do-list/)
+- [Live Demo Link](https://yulianav09.github.io/Group-capstone/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -100,7 +101,7 @@ Clone this repository to your desired folder:
 
 
 ```sh
-  git clone https://github.com/Yulianav09/To-Do-list
+  git clone https://github.com/Yulianav09/Group-capstone
 ```
 
 ### Install
@@ -132,11 +133,10 @@ After installing the project, run the following command to execute the project i
 - Twitter: [@Yuliana Velez Rodríguez](https://twitter.com/YulianaVel09)
 - LinkedIn: [Yuliana Velez Rodriguez](https://www.linkedin.com/in/yuliana-velez-rodriguez/)
 
-👤 **Iván Gonzalez**
+👤 **Obiba Kweku Adoma**
 
-- GitHub: [@ivangonzalez224](https://github.com/ivangonzalez224)
-- Twitter: [@ivang2204](https://twitter.com/ivang2204)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/iván-gonzalez-robles-957491275)
+- GitHub: [@obibaadoma](https://github.com/obibaadoma)
+- LinkedIn: [Derek Akrasi Konadu](in/derek-akrasi-konadu-187453151)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -145,9 +145,6 @@ After installing the project, run the following command to execute the project i
 ## 🔭 Future Features <a name="future-features"></a>
 
 - [x] **Implement more styles**
-- [x] **Add functionalities to add and remove elements**
-- [x] **Implement data recovery using the local storage**
-- [x] **Create interactivity to check and uncheck tasks**
 - [x] **Deploy Webpack project**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
