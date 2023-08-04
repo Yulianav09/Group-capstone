@@ -1,4 +1,5 @@
 import { addComment, getCommentsForPokemon } from './API.js';
+import { commentsCounter } from './commentsCounter.js';
 const htmlBody = document.querySelector('body')
 
 // Function to fetch Pokemon data from the PokeAPI
@@ -33,7 +34,9 @@ export default function showPopup(pokemonName) {
             <h2>${data.name.toUpperCase()}</h2>
             <p>Height: ${data.height}</p>
             <p>Weight: ${data.weight}</p>
+            <h2 id='commentsCounter'>Comments (0)</h2>
             <div id="commentsContainer"></div>
+            <h2>Add Comment</h2>
           `;
       popup.innerHTML = html;
       const closeButton = popup.querySelector('#closeButton');
@@ -49,15 +52,15 @@ export default function showPopup(pokemonName) {
             commentsContainer.innerHTML = '';
             comments.forEach((comment) => {
               const commentElement = document.createElement('p');
+              commentElement.classList.add('comment')
               commentElement.innerHTML = `${comment.creation_date} ${comment.username}: ${comment.comment}`;
               commentsContainer.appendChild(commentElement);
             });
+            commentsCounter()
           }).catch((error) => {
             console.warn('No comments found:', error);
           });
       };
-
-      popup.appendChild(commentsContainer);
       displayComments();
 
       const commentForm = document.createElement('form');
