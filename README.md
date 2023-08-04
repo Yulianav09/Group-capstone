@@ -69,7 +69,7 @@ For more information on the importance of a professional README for your reposit
 
 ### Key Features <a name="key-features"></a>
 
-- **Fech Pokemons from API**
+- **Fetch Pokemons from API**
 - **Save likes to the Involvement API**
 - **Save comments to the Involvement API**
 

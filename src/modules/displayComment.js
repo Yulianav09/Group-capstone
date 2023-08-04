@@ -4,7 +4,7 @@ import commentsCounter from './commentsCounter.js';
 const htmlBody = document.querySelector('body');
 
 // Function to fetch Pokemon data from the PokeAPI
-async function getPokemonDetails(pokemonName) {
+const getPokemonDetails = async (pokemonName) => {
   let data = {};
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
@@ -17,14 +17,14 @@ async function getPokemonDetails(pokemonName) {
 
 // Function to close the popup
 
-function closePopup() {
+const closePopup = () => {
   const popup = document.getElementById('popup');
   popup.classList.remove('show');
   htmlBody.style.overflowY = 'auto';
 }
 
 // Function to display the popup with selected item's details
-export default function showPopup(pokemonName) {
+export default (pokemonName) => {
   htmlBody.style.overflowY = 'hidden';
   const popup = document.getElementById('popup');
   getPokemonDetails(pokemonName)
